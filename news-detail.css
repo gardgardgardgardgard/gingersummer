@@ -1,0 +1,100 @@
+.news-detail-section {
+    padding: 80px 0;
+    background: var(--cream);
+    min-height: 60vh;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--primary-teal);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--primary-orange);
+}
+
+.news-detail {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.detail-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.detail-content {
+    padding: 3rem;
+}
+
+.detail-date {
+    color: var(--primary-orange);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.detail-title {
+    font-size: 2.5rem;
+    color: var(--primary-teal);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+.detail-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.signup-cta {
+    background: var(--sky-blue);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.signup-cta h3 {
+    color: var(--primary-teal);
+    margin-bottom: 1rem;
+}
+
+.signup-cta .btn-signup {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: var(--primary-orange);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.signup-cta .btn-signup:hover {
+    background: #a83f1f;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .detail-image {
+        height: 300px;
+    }
+
+    .detail-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .detail-title {
+        font-size: 2rem;
+    }
+}
