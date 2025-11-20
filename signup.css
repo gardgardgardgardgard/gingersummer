@@ -24,6 +24,8 @@
     display: flex;
     justify-content: center;
     margin-top: 3rem;
+    width: 100%;
+    flex-wrap: wrap;      /* prevent overflow on small screens */
 }
 
 .signup-info {
@@ -87,6 +89,8 @@
     padding: 2.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 700px;     /* similar to how a content column is usually constrained */
+    width: 100%;          /* fill available width but never exceed container */
 }
 
 .signup-form-container h2 {
@@ -172,7 +176,8 @@
 
 @media (max-width: 968px) {
     .signup-content {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
     }
 
     .signup-header h1 {
