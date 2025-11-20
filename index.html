@@ -55,26 +55,83 @@
             font-size: 1rem;
         }
 
-            .success-popup-box.loading .success-icon {
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        border: 3px solid #2D8B47;
-        border-top-color: transparent;
-        animation: spinner 0.8s linear infinite;
-        font-size: 0;
-    }
+        .success-popup-box.loading .success-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 3px solid #2D8B47;
+            border-top-color: transparent;
+            animation: spinner 0.8s linear infinite;
+            font-size: 0;
+        }
 
-    .success-popup-box.loading .success-message {
-        margin-top: 1rem;
-    }
+        .success-popup-box.loading .success-message {
+            margin-top: 1rem;
+        }
 
-    @keyframes spinner {
-        from { transform: rotate(0deg); }
-        to   { transform: rotate(360deg); }
-    }
+        @keyframes spinner {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
+<script>
+    const spotsURL = "https://script.google.com/macros/s/AKfycbzkCLcg3WVGEXNK4u58O2Vv2t-0PQiTxGBYk9slCnqpViNe6dNgmCHnfOBlIe3byKSX/exec";
+    const MAX_TEAMS = 15;
+
+    function updateSpotsLeft() {
+        const spotsEl = document.getElementById("spotsLeft");
+        const submitBtn = document.getElementById("submitBtn");
+
+        if (!spotsEl) return;
+
+        fetch(spotsURL)
+            .then(res => res.json())
+            .then(data => {
+                console.log('Data frå Apps Script:', data);
+
+                if (data && typeof data.spotsLeft === 'number') {
+
+                    if (data.spotsLeft <= 0) {
+                        // Fullt
+                        spotsEl.textContent = `Turneringa er full`;
+                        if (submitBtn) {
+                            submitBtn.disabled = true;
+                            submitBtn.style.backgroundColor = "#888";
+                            submitBtn.style.cursor = "not-allowed";
+                            submitBtn.textContent = "Fullt";
+                        }
+                    } else {
+                        // Ledige plassar
+                        spotsEl.textContent = `${data.spotsLeft} av ${MAX_TEAMS} plassar ledige`;
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.style.backgroundColor = "";
+                            submitBtn.style.cursor = "pointer";
+                            submitBtn.textContent = "Send inn påmelding";
+                        }
+                    }
+
+                } else {
+                    spotsEl.textContent = `Påmelding er open`;
+                }
+            })
+            .catch(err => {
+                console.error("Feil ved henting av ledige plassar:", err);
+                spotsEl.textContent = `Påmelding er open`;
+                // Her lar vi knappen vere som normalt
+            });
+    }
+
+    // Kjør først når HTML-en er klar
+    window.addEventListener('DOMContentLoaded', updateSpotsLeft);
+</script>
 
 <body>
     <!-- Hero Section -->
@@ -203,8 +260,14 @@
                     <div class="signup-cta">
                         <h3>Klar for å bli med?</h3>
                         <p>Samle ein makker, finn lagnamn og meld dykk på turneringa før plassane fyllast opp.</p>
+
+                        <p id="spotsLeft" style="font-weight:700; margin: 1rem 0; font-size:1.1rem;">
+                            Laster ledige plassar...
+                        </p>
+
                         <a href="#signup" class="btn-signup">Sjå påmeldingsskjema</a>
                     </div>
+
                 </div>
             </article>
         </div>
@@ -215,12 +278,11 @@
     <section id="signup" class="signup-section">
         <div class="container">
 
-
             <div class="signup-content">
 
                 <!-- Form only -->
                 <div class="signup-form-container">
-                    <h2>Påmelding</h2>
+                    <h2>Påmelding</hh2>
 
                     <!-- Prisinfo under overskrift -->
                     <form id="signupForm" class="signup-form">
@@ -240,25 +302,22 @@
                         </div>
 
                         <p class="price-info">
-                            Pris per person <strong>350,- kroner</strong> (700 per lag)<br>
+                            Pris per person <strong>350,- kroner</strong> (700,- per lag)<br>
                             Betaling gjennom Vipps til <strong>959 40 940</strong> (Eivind)<br><br>
                             <span style="color:#C94D26; font-weight:bold;">NB! <br> Påmeldinga er ikkje fullført før
                                 betaling er
                                 registrert.</span>
                         </p>
 
-                        <button type="submit" class="btn-submit">Send inn påmelding</button>
+                        <!-- Viktig: id lagt til her -->
+                        <button type="submit" id="submitBtn" class="btn-submit">Send inn påmelding</button>
                     </form>
                 </div>
-
 
             </div>
 
         </div>
     </section>
-
-
-
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
@@ -291,8 +350,6 @@
         </div>
     </section>
 
-
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -312,102 +369,109 @@
         </div>
     </footer>
 
-<!-- Success / Loading Popup -->
-<div id="successPopup" class="success-popup">
-    <div class="success-popup-box">
-        <div class="success-icon"></div>
-        <p class="success-message">Sender påmeldinga...</p>
-        <button id="closePopup" class="btn-submit" style="margin-top:0; display:none;">Lukk</button>
+    <!-- Success / Loading Popup -->
+    <div id="successPopup" class="success-popup">
+        <div class="success-popup-box">
+            <div class="success-icon"></div>
+            <p class="success-message">Sender påmeldinga...</p>
+            <button id="closePopup" class="btn-submit" style="margin-top:0; display:none;">Lukk</button>
+        </div>
     </div>
-</div>
-
 
     <!-- JS: send form with fetch to Apps Script and show popup -->
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxgJTDLi6bojObUWZHRSo6BgSVeY6U6jjwtjCg9J-1zg1OsucGWQIxB4Z0gsVgny8Yy/exec';
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxgJTDLi6bojObUWZHRSo6BgSVeY6U6jjwtjCg9J-1zg1OsucGWQIxB4Z0gsVgny8Yy/exec';
 
-    const form = document.getElementById('signupForm');
-    const popup = document.getElementById('successPopup');
-    const closePopupBtn = document.getElementById('closePopup');
-    const popupBox = popup ? popup.querySelector('.success-popup-box') : null;
-    const popupIcon = popup ? popup.querySelector('.success-icon') : null;
-    const popupMsg = popup ? popup.querySelector('.success-message') : null;
-    const submitBtn = form ? form.querySelector('.btn-submit') : null;
+        const form = document.getElementById('signupForm');
+        const popup = document.getElementById('successPopup');
+        const closePopupBtn = document.getElementById('closePopup');
+        const popupBox = popup ? popup.querySelector('.success-popup-box') : null;
+        const popupIcon = popup ? popup.querySelector('.success-icon') : null;
+        const popupMsg = popup ? popup.querySelector('.success-message') : null;
+        const submitBtn = form ? form.querySelector('.btn-submit') : null;
 
-    function showLoadingState() {
-        if (!popup || !popupBox || !popupIcon || !popupMsg) return;
+        function showLoadingState() {
+            if (!popup || !popupBox || !popupIcon || !popupMsg) return;
 
-        popup.classList.add('visible');
-        popupBox.classList.add('loading');
+            popup.classList.add('visible');
+            popupBox.classList.add('loading');
 
-        // Spinner (no text in icon)
-        popupIcon.textContent = '';
-        // Loading text
-        popupMsg.textContent = 'Sender påmeldinga...';
+            // Spinner (no text in icon)
+            popupIcon.textContent = '';
+            // Loading text
+            popupMsg.textContent = 'Sender påmeldinga...';
 
-        if (closePopupBtn) {
-            closePopupBtn.style.display = 'none';
-        }
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sender...';
-        }
-    }
-
-    function showSuccessState() {
-        if (!popupBox || !popupIcon || !popupMsg) return;
-
-        popupBox.classList.remove('loading');
-        popupIcon.textContent = '✔';
-        popupMsg.textContent = 'Takk for påmeldinga! Laget er registrert.';
-
-        if (closePopupBtn) {
-            closePopupBtn.style.display = 'inline-block';
-        }
-        if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send inn påmelding';
-        }
-    }
-
-    if (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-
-            // Vis popup med loading med ein gong
-            showLoadingState();
-
-            fetch(scriptURL, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors'
-            })
-                .then(() => {
-                    form.reset();
-                    showSuccessState();
-                })
-                .catch(() => {
-                    // Sjølv om noko feilar, vis success-tekst (du kan evt. endre til feilmelding her)
-                    showSuccessState();
-                });
-        });
-    }
-
-    if (closePopupBtn && popup) {
-        closePopupBtn.addEventListener('click', () => {
-            popup.classList.remove('visible');
-        });
-
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) {
-                popup.classList.remove('visible');
+            if (closePopupBtn) {
+                closePopupBtn.style.display = 'none';
             }
-        });
-    }
-</script>
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sender...';
+            }
+        }
 
+        function showSuccessState() {
+            if (!popupBox || !popupIcon || !popupMsg) return;
+
+            popupBox.classList.remove('loading');
+            popupIcon.textContent = '✔';
+            popupMsg.textContent = 'Takk for påmeldinga! Laget er registrert.';
+
+            if (closePopupBtn) {
+                closePopupBtn.style.display = 'inline-block';
+            }
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send inn påmelding';
+            }
+        }
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+
+                // Vis popup med loading med ein gong
+                showLoadingState();
+
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                })
+                    .then(() => {
+                        form.reset();
+                        showSuccessState();
+
+                        // Oppdater ledige plassar etter påmelding
+                        if (typeof updateSpotsLeft === 'function') {
+                            updateSpotsLeft();
+                        }
+                    })
+                    .catch(() => {
+                        // Sjølv om noko feilar, vis success-tekst (du kan evt. endre til feilmelding her)
+                        showSuccessState();
+
+                        if (typeof updateSpotsLeft === 'function') {
+                            updateSpotsLeft();
+                        }
+                    });
+            });
+        }
+
+        if (closePopupBtn && popup) {
+            closePopupBtn.addEventListener('click', () => {
+                popup.classList.remove('visible');
+            });
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.classList.remove('visible');
+                }
+            });
+        }
+    </script>
 
     <script src="main.js"></script>
 </body>
