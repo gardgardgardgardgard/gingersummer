@@ -315,6 +315,7 @@ body {
     align-items: center;
     gap: 2.5rem;
     margin: 1.5rem 0 2rem 0;
+    width: 100%;
 }
 
 /* Left sponsor - 70% of original size */
@@ -324,8 +325,9 @@ body {
     height: auto;
 }
 
-/* Left sponsor - 70% of original size */
+/* OnlineGolf logo – single big sponsor */
 .premier-logo-left2 {
+    display: block;
     width: 100%;
     max-width: 300px;
     height: auto;
@@ -341,11 +343,27 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
-
 /* Centered golf divider */
 .section-divider {
     text-align: center;
     font-size: 2rem;
     margin: 1.5rem 0;
     opacity: 0.8;
+}
+
+/* --- MOBILE TWEAKS FOR SPONSOR LOGOS --- */
+@media (max-width: 600px) {
+    .premier-logos {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    /* Extra-strong rule so other CSS can't override it */
+    .news-detail .premier-logos img.premier-logo-left2 {
+        width: 100% !important;
+        max-width: 220px;
+        height: auto !important;
+        display: block;
+        margin: 0 auto;
+    }
 }
