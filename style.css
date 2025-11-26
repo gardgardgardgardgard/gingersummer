@@ -324,6 +324,13 @@ body {
     height: auto;
 }
 
+/* Left sponsor - 70% of original size */
+.premier-logo-left2 {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
 /* Right sponsor - 70% of original size and round */
 .premier-logo-right {
     width: 28%;
