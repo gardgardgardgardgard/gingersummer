@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="nn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GingerSummer – Påsketurnering</title>
+    <link rel="icon" type="image/png" href="logo_transparent.png">
+
+    <meta name="description"
+        content="GingerSummer – Ei profesjonell og sosial golfturnering. Info, program og påmelding på éi side." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <header class="site-header" id="top">
+        <div class="container header-inner">
+            <div class="brand">
+                <img src="logo_transparent.png" alt="GingerSummer-logo" class="logo-img-left">
+            </div>
+
+            <nav class="nav" aria-label="Hovudmeny">
+                <ul class="nav-menu">
+                    <li><a class="nav-link" href="#hero">Heim</a></li>
+                    <li><a class="nav-link" href="#info">Turneringsinfo</a></li>
+                    <li><a class="nav-link" href="#register">Påmelding</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="container hero-grid">
+
+                <div class="hero-copy">
+                    <h2 class="hero-title">
+                        GingerSummer <span class="accent">Påsketurnering</span>
+                    </h2>
+
+                    <p class="hero-lead">
+                        Etter ei vellukka juleturnering i vinter samlar vi igjen golfglade til ei ny turnering.
+                    </p>
+
+                    <div class="hero-cta">
+                        <a class="btn btn-primary" href="#register">Meld på lag</a>
+                        <a class="btn btn-ghost" href="#info">Sjå turneringsinfo</a>
+                    </div>
+                </div>
+
+                <div class="hero-media">
+                    <div class="hero-card">
+                        <img src="hero.png" alt="GingerSummer hero-bilete" class="hero-image">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SPONSORAR -->
+        <section class="section sponsors-section">
+            <div class="container">
+
+                <div class="section-head center">
+                    <h3 class="section-title">Sponsorar</h3>
+                </div>
+
+                <div class="sponsors-stack">
+
+                    <!-- BORDI -->
+                    <div class="sponsor-top">
+                        <div class="bordi-wrapper">
+                            <img src="logo_bordi.png" alt="Bordi" class="sponsor-logo sponsor-bordi">
+                        </div>
+                    </div>
+
+                    <!-- MARCEL -->
+                    <div class="sponsor-bottom">
+                        <img src="logo_marcel.png" alt="Marcel" class="sponsor-logo sponsor-marcel">
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- INFO -->
+        <section class="section" id="info">
+            <div class="container">
+
+                <div class="section-head">
+                    <h3 class="section-title">Turneringsinformasjon</h3>
+                    <p class="section-subtitle">
+                        Alt du treng å vite – format, tidspunkt, reglar og praktisk informasjon.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <article class="card">
+                        <h4 class="card-title">Tid & stad</h4>
+                        <ul class="list">
+                            <li><strong>Fredag 27. mars:</strong> 18:00</li>
+                            <li><strong>Lørdag 28. mars:</strong> 11:00</li>
+                            <li><strong>Oppmøte sluttspel:</strong> 16:45</li>
+                            <li><strong>Start sluttspel:</strong> 17:00 (laurdag)</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h4 class="card-title">Format</h4>
+                        <ul class="list">
+                            <li><strong>Spelform:</strong> Scramble brutto</li>
+                            <li><strong>Tal hol:</strong> Best av 3 hol</li>
+                            <li><strong>Lag:</strong> 2 spelarar</li>
+                            <li><strong>Totalt lag:</strong> 30 (15 fredag / 15 laurdag)</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h4 class="card-title">Sluttspel</h4>
+                        <ul class="list">
+                            <li>14 lag går vidare</li>
+                            <li>Åttedelsfinale</li>
+                            <li>Kvartfinale</li>
+                            <li>Semifinale</li>
+                            <li>Finale (5 hol)</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h4 class="card-title">Praktisk informasjon</h4>
+                        <ul class="list">
+                            <li><strong>Startkontingent:</strong> 700 kr (per lag)</li>
+                            <li><strong>Påmeldingsfrist:</strong> 1 veke før</li>
+                            <li><strong>Premiar:</strong> Blir kunngjorde seinare</li>
+                        </ul>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- REGISTER -->
+        <section class="section register-section" id="register">
+            <div class="container">
+
+                <div class="section-head">
+                    <h3 class="section-title">Påmelding</h3>
+                    <p class="section-subtitle">
+                        Meld på laget dykkar under. Påmeldinga er gyldig når 700 kr er vippsa til
+                        <strong>Eivind – 959 40 940</strong>.
+                    </p>
+                </div>
+
+                <form class="card form clean-form" id="teamForm" novalidate>
+
+                    <div class="field">
+                        <label for="teamName">Lagnamn</label>
+                        <input id="teamName" name="teamName" type="text" placeholder="T.d. Double Bogey Brothers"
+                            required />
+                    </div>
+
+                    <div class="field">
+                        <label for="player1">Spelar 1</label>
+                        <input id="player1" name="player1" type="text" placeholder="Namn" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="player2">Spelar 2</label>
+                        <input id="player2" name="player2" type="text" placeholder="Namn" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Kva dag stiller laget?</label>
+
+                        <div class="day-toggle">
+                            <label class="toggle-option">
+                                <input type="radio" name="day" value="27.03 – 18:00" required />
+                                <span>Fredag 27. mars – 18:00</span>
+                            </label>
+
+                            <label class="toggle-option">
+                                <input type="radio" name="day" value="28.03 – 11:00" required />
+                                <span>Laurdag 28. mars – 11:00</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary full-width" type="submit">
+                        Send påmelding
+                    </button>
+
+                    <div class="alert" id="formAlert" role="status"></div>
+
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container footer-grid">
+
+                <div>
+                    <img src="logo_transparent.png" alt="GingerSummer-logo" class="footer-logo">
+                    <p class="footer-tagline">
+                        Ei sosial og super ultra mega profesjonell golfturnering.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h5>Snøgglenker</h5>
+                    <a href="#hero">Heim</a>
+                    <a href="#info">Turneringsinfo</a>
+                    <a href="#register">Påmelding</a>
+                </div>
+
+                <div>
+                    <h5>Kontakt</h5>
+                    <a href="https://www.instagram.com/gingersummer.no/" target="_blank">
+                        Kontakt oss på Instagram
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                © 2025 GingerSummer. Alle rettar reserverte.
+            </div>
+        </footer>
+
+    </main>
+    <!-- POPUP MODAL -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h3>Påmelding registrert 🎉</h3>
+            <p>Hugs å vippse 700 kr for å stadfeste påmeldinga.</p>
+            <button class="btn btn-primary" id="closeModal">Lukk</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<!-- LAUNCH GATE -->
+<div class="launch-gate" id="launchGate">
+
+    <div class="gate-center">
+        <img src="logo_transparent.png" class="gate-logo" alt="GingerSummer logo">
+
+
+
+        <div class="day-count">
+            <span id="days">00</span>
+            <small>DAGAR IGJEN</small>
+        </div>
+    </div>
+
+    <div class="gate-bottom">
+        <div class="password-row">
+            <input type="password" id="gatePassword" placeholder="Passord">
+            <button id="unlockBtn">KJØH</button>
+        </div>
+        <p class="gate-error" id="gateError"></p>
+    </div>
+
+</div>
+
+</html>
