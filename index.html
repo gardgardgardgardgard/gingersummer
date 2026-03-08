@@ -183,14 +183,26 @@
                         <label>Kva dag stiller laget?</label>
 
                         <div class="day-toggle">
-                            <label class="toggle-option">
+                            <label class="toggle-option day-option" id="fridayOption">
                                 <input type="radio" name="day" value="27.03 – 18:00" required />
-                                <span>Fredag 27. mars – 18:00</span>
+                                <span class="day-option-top">
+                                    <span>Fredag 27. mars – 18:00</span>
+                                    <strong id="countFriday">0/15</strong>
+                                </span>
+                                <span class="day-progress">
+                                    <span class="day-progress-bar" id="barFriday"></span>
+                                </span>
                             </label>
 
-                            <label class="toggle-option">
+                            <label class="toggle-option day-option" id="saturdayOption">
                                 <input type="radio" name="day" value="28.03 – 11:00" required />
-                                <span>Laurdag 28. mars – 11:00</span>
+                                <span class="day-option-top">
+                                    <span>Laurdag 28. mars – 11:00</span>
+                                    <strong id="countSaturday">0/15</strong>
+                                </span>
+                                <span class="day-progress">
+                                    <span class="day-progress-bar" id="barSaturday"></span>
+                                </span>
                             </label>
                         </div>
                     </div>
@@ -247,8 +259,5 @@
     </div>
     <script src="script.js"></script>
 </body>
-
-
-
 
 </html>
