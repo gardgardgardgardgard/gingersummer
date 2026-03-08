@@ -183,28 +183,38 @@
                         <label>Kva dag stiller laget?</label>
 
                         <div class="day-toggle">
-                            <label class="toggle-option day-option" id="fridayOption">
-                                <input type="radio" name="day" value="27.03 – 18:00" required />
-                                <span class="day-option-top">
-                                    <span>Fredag 27. mars – 18:00</span>
-                                    <strong id="countFriday">0/15</strong>
-                                </span>
-                                <span class="day-progress">
-                                    <span class="day-progress-bar" id="barFriday"></span>
-                                </span>
-                            </label>
 
-                            <label class="toggle-option day-option" id="saturdayOption">
-                                <input type="radio" name="day" value="28.03 – 11:00" required />
-                                <span class="day-option-top">
-                                    <span>Laurdag 28. mars – 11:00</span>
-                                    <strong id="countSaturday">0/15</strong>
-                                </span>
-                                <span class="day-progress">
-                                    <span class="day-progress-bar" id="barSaturday"></span>
-                                </span>
-                            </label>
-                        </div>
+    <label class="toggle-option day-option" id="fridayOption">
+        <input type="radio" name="day" value="27.03 – 18:00" required />
+
+        <div class="day-text">
+            <div class="day-title">
+                Fredag 27. mars – 18:00
+            </div>
+
+            <div class="day-count" id="countFriday">
+                0 av 15 lag påmeldte
+            </div>
+        </div>
+
+    </label>
+
+    <label class="toggle-option day-option" id="saturdayOption">
+        <input type="radio" name="day" value="28.03 – 11:00" required />
+
+        <div class="day-text">
+            <div class="day-title">
+                Laurdag 28. mars – 11:00
+            </div>
+
+            <div class="day-count" id="countSaturday">
+                0 av 15 lag påmeldte
+            </div>
+        </div>
+
+    </label>
+
+</div>
                     </div>
 
                     <button class="btn btn-primary full-width" type="submit">
@@ -261,3 +271,4 @@
 </body>
 
 </html>
+
