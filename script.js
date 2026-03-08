@@ -126,67 +126,7 @@ closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
 
-// ================= LAUNCH GATE (ROBUST VERSION) =================
 
-document.addEventListener("DOMContentLoaded", () => {
 
-  const gate = document.getElementById("launchGate");
-  const unlockBtn = document.getElementById("unlockBtn");
-  const gatePasswordInput = document.getElementById("gatePassword");
-  const gateError = document.getElementById("gateError");
-
-  const correctPassword = "196m5jern";
-
-  // Dersom gate ikkje finst → avslutt
-  if (!gate) return;
-
-  // Sjekk om brukaren allereie har låst opp
-  if (localStorage.getItem("gateUnlocked") === "true") {
-    gate.classList.add("hidden");
-  }
-
-  function getNextSaturday() {
-    const now = new Date();
-    const result = new Date(now);
-    result.setDate(now.getDate() + ((6 - now.getDay() + 7) % 7));
-    result.setHours(0, 0, 0, 0);
-
-    if (result <= now) {
-      result.setDate(result.getDate() + 7);
-    }
-
-    return result;
-  }
-
-  const targetDate = getNextSaturday();
-
-  function updateCountdown() {
-    const now = new Date();
-    const diff = targetDate - now;
-
-    if (diff <= 0) {
-      gate.classList.add("hidden");
-      return;
-    }
-
-    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    const daysElement = document.getElementById("days");
-
-    if (daysElement) {
-      daysElement.textContent = days.toString().padStart(2, "0");
-    }
-  }
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  unlockBtn?.addEventListener("click", () => {
-    if (gatePasswordInput.value === correctPassword) {
-      localStorage.setItem("gateUnlocked", "true");
-      gate.classList.add("hidden");
-    } else {
-      gateError.textContent = "Feil passord.";
-    }
-  });
 
 });
