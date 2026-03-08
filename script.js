@@ -35,48 +35,31 @@ function getDayCounts() {
 }
 
 function updateDayAvailability() {
-  const { fridayCount, saturdayCount } = getDayCounts();
+
+  const fridayCount = teams.filter(t => t.day === "27.03 – 18:00").length;
+  const saturdayCount = teams.filter(t => t.day === "28.03 – 11:00").length;
 
   if (countFriday) {
-    countFriday.textContent = `${fridayCount}/15`;
+    countFriday.textContent = `${fridayCount} av 15 lag påmeldte`;
   }
 
   if (countSaturday) {
-    countSaturday.textContent = `${saturdayCount}/15`;
+    countSaturday.textContent = `${saturdayCount} av 15 lag påmeldte`;
   }
 
-  if (barFriday) {
-    barFriday.style.width = `${(fridayCount / 15) * 100}%`;
+  const fridayInput = fridayOption.querySelector('input[name="day"]');
+  const saturdayInput = saturdayOption.querySelector('input[name="day"]');
+
+  if (fridayCount >= 15) {
+    fridayOption.classList.add("full");
+    fridayInput.disabled = true;
   }
 
-  if (barSaturday) {
-    barSaturday.style.width = `${(saturdayCount / 15) * 100}%`;
+  if (saturdayCount >= 15) {
+    saturdayOption.classList.add("full");
+    saturdayInput.disabled = true;
   }
 
-  const fridayInput = fridayOption ? fridayOption.querySelector('input[name="day"]') : null;
-  const saturdayInput = saturdayOption ? saturdayOption.querySelector('input[name="day"]') : null;
-
-  if (fridayOption && fridayInput) {
-    if (fridayCount >= 15) {
-      fridayOption.classList.add("full");
-      fridayInput.disabled = true;
-      fridayInput.checked = false;
-    } else {
-      fridayOption.classList.remove("full");
-      fridayInput.disabled = false;
-    }
-  }
-
-  if (saturdayOption && saturdayInput) {
-    if (saturdayCount >= 15) {
-      saturdayOption.classList.add("full");
-      saturdayInput.disabled = true;
-      saturdayInput.checked = false;
-    } else {
-      saturdayOption.classList.remove("full");
-      saturdayInput.disabled = false;
-    }
-  }
 }
 
 function renderTeams() {
@@ -207,3 +190,4 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
