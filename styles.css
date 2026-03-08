@@ -943,9 +943,7 @@ body {
   font-weight:600;
 }
 
-.day-option:has(input:checked){
-  border:2px solid #000;
-}
+
 
 /* ===== FIX DAY BUTTONS ===== */
 
@@ -987,4 +985,5 @@ body {
   opacity:.45;
   cursor:not-allowed;
 }
+
 
