@@ -13,6 +13,13 @@ const closeModalBtn = document.getElementById("closeModal");
 const modalTitle = modal.querySelector("h3");
 const modalText = modal.querySelector("p");
 
+const countFriday = document.getElementById("countFriday");
+const countSaturday = document.getElementById("countSaturday");
+const barFriday = document.getElementById("barFriday");
+const barSaturday = document.getElementById("barSaturday");
+const fridayOption = document.getElementById("fridayOption");
+const saturdayOption = document.getElementById("saturdayOption");
+
 const storageKey = "gingersummer_teams_v5";
 let teams = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
@@ -20,8 +27,63 @@ function saveTeams() {
   localStorage.setItem(storageKey, JSON.stringify(teams));
 }
 
+function getDayCounts() {
+  const fridayCount = teams.filter(t => t.day === "27.03 – 18:00").length;
+  const saturdayCount = teams.filter(t => t.day === "28.03 – 11:00").length;
+
+  return { fridayCount, saturdayCount };
+}
+
+function updateDayAvailability() {
+  const { fridayCount, saturdayCount } = getDayCounts();
+
+  if (countFriday) {
+    countFriday.textContent = `${fridayCount}/15`;
+  }
+
+  if (countSaturday) {
+    countSaturday.textContent = `${saturdayCount}/15`;
+  }
+
+  if (barFriday) {
+    barFriday.style.width = `${(fridayCount / 15) * 100}%`;
+  }
+
+  if (barSaturday) {
+    barSaturday.style.width = `${(saturdayCount / 15) * 100}%`;
+  }
+
+  const fridayInput = fridayOption ? fridayOption.querySelector('input[name="day"]') : null;
+  const saturdayInput = saturdayOption ? saturdayOption.querySelector('input[name="day"]') : null;
+
+  if (fridayOption && fridayInput) {
+    if (fridayCount >= 15) {
+      fridayOption.classList.add("full");
+      fridayInput.disabled = true;
+      fridayInput.checked = false;
+    } else {
+      fridayOption.classList.remove("full");
+      fridayInput.disabled = false;
+    }
+  }
+
+  if (saturdayOption && saturdayInput) {
+    if (saturdayCount >= 15) {
+      saturdayOption.classList.add("full");
+      saturdayInput.disabled = true;
+      saturdayInput.checked = false;
+    } else {
+      saturdayOption.classList.remove("full");
+      saturdayInput.disabled = false;
+    }
+  }
+}
+
 function renderTeams() {
-  if (!teamList) return;
+  if (!teamList) {
+    updateDayAvailability();
+    return;
+  }
 
   if (teams.length === 0) {
     teamList.innerHTML = `
@@ -29,6 +91,7 @@ function renderTeams() {
         Ingen påmeldte lag ennå. Vær førstemann! 🏌️
       </div>
     `;
+    updateDayAvailability();
     return;
   }
 
@@ -60,10 +123,15 @@ function renderTeams() {
       }
     </div>
   `;
+
+  updateDayAvailability();
 }
+
+renderTeams();
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  formAlert.textContent = "";
 
   const selectedDay = document.querySelector('input[name="day"]:checked');
 
@@ -79,6 +147,20 @@ form.addEventListener("submit", async (e) => {
 
   if (!teamName || !player1 || !player2) {
     formAlert.textContent = "Fyll inn lagnamn og begge spelarar.";
+    return;
+  }
+
+  const { fridayCount, saturdayCount } = getDayCounts();
+
+  if (day === "27.03 – 18:00" && fridayCount >= 15) {
+    formAlert.textContent = "Fredag er fullteikna.";
+    updateDayAvailability();
+    return;
+  }
+
+  if (day === "28.03 – 11:00" && saturdayCount >= 15) {
+    formAlert.textContent = "Laurdag er fullteikna.";
+    updateDayAvailability();
     return;
   }
 
@@ -124,9 +206,4 @@ form.addEventListener("submit", async (e) => {
 
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
-});
-
-
-
-
 });
