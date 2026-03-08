@@ -913,3 +913,29 @@ body {
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.day-option{
+  display:block;
+  padding:12px 14px;
+}
+
+.day-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.day-title{
+  font-weight:600;
+}
+
+.day-count{
+  font-size:0.85rem;
+  opacity:0.75;
+  margin-top:2px;
+}
+
+.toggle-option.full{
+  opacity:0.45;
+  cursor:not-allowed;
+}
+
