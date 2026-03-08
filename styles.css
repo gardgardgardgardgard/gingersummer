@@ -947,3 +947,44 @@ body {
   border:2px solid #000;
 }
 
+/* ===== FIX DAY BUTTONS ===== */
+
+.day-option{
+  display:block;
+  cursor:pointer;
+}
+
+.day-option input{
+  display:none;
+}
+
+/* normal knapp */
+.day-option .day-text{
+  display:block;
+  padding:.8rem 1rem;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.2);
+  text-align:center;
+  transition:.2s ease;
+}
+
+/* valgt knapp */
+.day-option input:checked + .day-text{
+  background:var(--primary-orange);
+  color:white;
+  border-color:var(--primary-orange);
+}
+
+/* tekstlinje 2 */
+.day-count{
+  font-size:.8rem;
+  opacity:.8;
+  margin-top:2px;
+}
+
+/* full dag */
+.toggle-option.full .day-text{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
