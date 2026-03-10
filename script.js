@@ -28,7 +28,12 @@ let teams = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
 async function loadTeamsFromSheet() {
   try {
-    const response = await fetch(scriptURL);
+
+    const response = await fetch(scriptURL, {
+      method: "GET",
+      mode: "cors"
+    });
+
     const data = await response.json();
 
     teams = data;
@@ -37,6 +42,9 @@ async function loadTeamsFromSheet() {
 
   } catch (error) {
     console.error("Kunne ikkje hente lag frå Google Sheets", error);
+
+    // fallback til localStorage
+    renderTeams();
   }
 }
 
@@ -217,6 +225,7 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
 
 
 
