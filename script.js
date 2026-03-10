@@ -1,6 +1,6 @@
 // === GOOGLE APPS SCRIPT WEB APP ===
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbyiG2aEeWKEriiECWGWvWqBySqMtd3A7L-bDywO-8LYtI-xYZdXWA-LD6TVihS2ulzH/exec";
+  "https://script.google.com/macros/s/AKfycbylSeF6NReV2F3A3_0s_7_UIYF441_Oi_t-vMLUiew7woLtQlNnut8N71KsAvGUlU-e/exec";
 
 const form = document.getElementById("teamForm");
 const teamList = document.getElementById("teamList");
@@ -221,6 +221,7 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
 
 
 
