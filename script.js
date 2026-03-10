@@ -36,12 +36,11 @@ function loadTeamsFromSheet() {
 }
 
 function handleTeams(data) {
+  console.log("Data frå Google:", data);
 
-  teams = data;
-
+  teams = data;   // overskriv lokal data
   saveTeams();
   renderTeams();
-
 }
 
 function saveTeams() {
@@ -221,6 +220,7 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
 
 
 
