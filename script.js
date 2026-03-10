@@ -20,6 +20,9 @@ const barSaturday = document.getElementById("barSaturday");
 const fridayOption = document.getElementById("fridayOption");
 const saturdayOption = document.getElementById("saturdayOption");
 
+const fridayText = document.getElementById("fridayText");
+const saturdayText = document.getElementById("saturdayText");
+
 const storageKey = "gingersummer_teams_v5";
 let teams = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
@@ -204,6 +207,7 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
 
 
 
