@@ -49,11 +49,11 @@ function updateDayAvailability() {
   saturdayInput.disabled = false;
 
   if (fridayText) {
-    fridayText.textContent = `Fredag 27. mars – 18:00 (${fridayCount} av 15 lag påmeldte)`;
+    fridayText.textContent = `Fredag 27. mars – 18:00`;
   }
 
   if (saturdayText) {
-    saturdayText.textContent = `Laurdag 28. mars – 11:00 (${saturdayCount} av 15 lag påmeldte)`;
+    saturdayText.textContent = `Laurdag 28. mars – 11:00`;
   }
 
   if (fridayCount >= 15) {
@@ -146,3 +146,4 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
