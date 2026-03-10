@@ -26,26 +26,22 @@ const saturdayText = document.getElementById("saturdayText");
 const storageKey = "gingersummer_teams_v5";
 let teams = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
-async function loadTeamsFromSheet() {
-  try {
+function loadTeamsFromSheet() {
 
-    const response = await fetch(scriptURL, {
-      method: "GET",
-      mode: "cors"
-    });
+  const script = document.createElement("script");
 
-    const data = await response.json();
+  script.src = scriptURL + "?callback=handleTeams";
 
-    teams = data;
-    saveTeams();
-    renderTeams();
+  document.body.appendChild(script);
+}
 
-  } catch (error) {
-    console.error("Kunne ikkje hente lag frå Google Sheets", error);
+function handleTeams(data) {
 
-    // fallback til localStorage
-    renderTeams();
-  }
+  teams = data;
+
+  saveTeams();
+  renderTeams();
+
 }
 
 function saveTeams() {
@@ -225,6 +221,7 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
 
 
 
