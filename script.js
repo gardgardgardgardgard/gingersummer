@@ -124,7 +124,7 @@ function renderTeams() {
   updateDayAvailability();
 }
 
-renderTeams();
+loadTeamsFromSheet();
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -204,5 +204,6 @@ form.addEventListener("submit", async (e) => {
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
+
 
 
